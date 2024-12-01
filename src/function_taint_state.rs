@@ -18,7 +18,7 @@ pub struct FunctionTaintState<'m> {
     map: HashMap<Name, TaintedType>,
     /// Set of basic blocks that have tainted terminators (e.g., the branch
     /// condition is tainted). Unconditional branches are never tainted.
-    tainted_terminators: HashSet<Name>,
+    pub tainted_terminators: HashSet<Name>,
     /// Reference to the llvm-ir `Module` containing this function
     pub(crate) module: &'m Module,
     /// Reference to the `TaintState`'s named struct types

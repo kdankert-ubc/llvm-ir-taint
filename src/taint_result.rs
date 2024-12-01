@@ -6,7 +6,7 @@ use std::collections::HashMap;
 /// The result of taint-tracking analysis on LLVM module(s)
 pub struct TaintResult<'m> {
     /// Map from function name to the `FunctionTaintState` for that function
-    pub(crate) fn_taint_states: HashMap<&'m str, FunctionTaintState<'m>>,
+    pub fn_taint_states: HashMap<&'m str, FunctionTaintState<'m>>,
 
     /// Map from the name of a named struct, to the type for that struct's
     /// contents.
