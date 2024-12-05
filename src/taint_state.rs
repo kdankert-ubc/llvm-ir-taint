@@ -246,6 +246,7 @@ impl<'m> TaintState<'m> {
         // In either case, this is guaranteed to converge because we only ever
         // change things from untainted to tainted. In the limit, everything becomes
         // tainted, and then nothing can change so the algorithm must terminate.
+        let mut iter_ctr = 0;
         loop {
             let fn_name = match self.worklist.borrow_mut().pop() {
                 Some(fn_name) => fn_name,
@@ -307,6 +308,10 @@ impl<'m> TaintState<'m> {
                 },
             };
             if changed {
+                iter_ctr += 1;
+                if iter_ctr >= 8 {
+                    panic!("Infinite analysis");
+                }
                 self.worklist.borrow_mut().add(fn_name);
             }
         }
